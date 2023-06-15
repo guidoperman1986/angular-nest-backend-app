@@ -3,6 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 
 import { AuthModule } from './auth/auth.module';
+import { WordsModule } from './words/words.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -10,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
       dbName: process.env.MONGO_DB_NAME,
     }),
     AuthModule,
+    WordsModule,
   ],
   controllers: [],
   providers: [],
