@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { WordsService } from './words.service';
 import { CreateWordDto } from './dto/create-word.dto';
@@ -24,8 +25,8 @@ export class WordsController {
   }
 
   @Get()
-  findAll() {
-    return this.wordsService.findAll();
+  findAll(@Query() { skip, limit }) {
+    return this.wordsService.findAll(skip, limit);
   }
 
   @Get('/:word')
