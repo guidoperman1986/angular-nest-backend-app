@@ -25,8 +25,17 @@ export class WordsService {
     }
   }
 
-  findAll() {
-    return this.wordModle.find();
+  async findAll(skip: number, limit: number) {
+    const countItems = await this.wordModle.countDocuments({}).exec();
+    const totalPages = (await Math.floor((countItems - 1) / limit)) + 1;
+
+    const words = await this.wordModle.find().skip(skip).limit(limit);
+
+    return {
+      words,
+      countItems,
+      totalPages,
+    };
   }
 
   async findOne(word: string) {
