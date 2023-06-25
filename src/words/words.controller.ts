@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   Controller,
   Get,
@@ -29,6 +30,11 @@ export class WordsController {
     return this.wordsService.findAll(skip, limit);
   }
 
+  @Get('findAndDelete')
+  findAllAndDelete(@Query() { englishWord }) {
+    return this.wordsService.findAllAndDelete(englishWord);
+  }
+
   @Get('/:word')
   findOne(@Param('word') word: string) {
     return this.wordsService.findOne(word);
@@ -45,4 +51,6 @@ export class WordsController {
   remove(@Param('id') id: string) {
     return this.wordsService.remove(+id);
   }
+
+  //TODO: traer lo ultimo que se grabo
 }

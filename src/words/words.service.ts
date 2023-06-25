@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateWordDto } from './dto/create-word.dto';
 import { UpdateWordDto } from './dto/update-word.dto';
@@ -35,6 +36,26 @@ export class WordsService {
       words,
       countItems,
       totalPages,
+    };
+  }
+
+  async findAllAndDelete(englishWord: string) {
+    const words = await this.wordModle.find({englishWord})
+
+    let result;
+    if (words.length > 0) {
+      result = await this.wordModle.deleteMany({ englishWord });
+    } else {
+      result = {
+        ok: false,
+        message: 'No word was found'
+      }
+    }
+
+    
+    return {
+      ok: true,
+      result
     };
   }
 
